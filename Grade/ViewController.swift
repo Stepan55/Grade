@@ -9,20 +9,24 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var celsiusLabel: UILabel!
     @IBOutlet weak var farenheitLabel: UILabel!
     @IBOutlet weak var kelvinLabel: UILabel!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        slider.value = 0.5
-        slider.minimumValue = 0
-        slider.maximumValue = 1
-    }
+    @IBOutlet weak var slider: UISlider! {
+            didSet {
+                slider.maximumValue = 100
+                slider.minimumValue = -100
+                slider.value = 0
+            }
+        }
     
     @IBAction func slideAction(_ sender: UISlider) {
-        
+        let tempCelsius = sender.value
+        celsiusLabel.text = "\(Int(round(tempCelsius)))ºC"
+        farenheitLabel.text = "\(Int(round(tempCelsius * 9 / 5 + 32)))ºF"
+        kelvinLabel.text = "\(Int(round(tempCelsius + 273)))ºK"
+
     }
     
 
